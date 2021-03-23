@@ -1,0 +1,32 @@
+extends ./layout/index
+
+block contenido
+    main.container.mt-5
+     h1.text-center.mt-5 #{pagina}
+    
+     include ./layout/testimo
+
+     .row 
+        h2.d-block.w-100.text-center Agrega un testimonial
+
+        if(errores)
+            each err in errores
+                .alert.col.alert-danger.text-center= err.error
+     .row.justify-content-center
+        .col-md-8
+            form(action="/testimoniales" method='POST')
+                .mb-3
+                    label.form-label(for='nombre') Nombre
+                    input#nombre.form-control(type='nombre' name="nombre", value=nombre )
+                    
+                .mb-3
+                    label.form-label(for='email') Email
+                    input#email.form-control(type='email' aria-describedby='emailHelp', name="email", value= email)
+                    #emailHelp.form-text No compartas informacion con cualquiera
+                .mb-3
+                    label.form-label(for='mensaje') Mensaje
+                    br
+                    textarea#mensaje.form-control(name="mensaje")= mensaje 
+       
+                button.btn.btn-primary.btn-block(type='submit') Submit
+
